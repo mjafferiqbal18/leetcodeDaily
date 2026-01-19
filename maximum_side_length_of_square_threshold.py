@@ -10,7 +10,12 @@ class Solution:
         - Then we start at each r,c and for each length in range 1<=x<=maxLen, we check if area <= threshold
 
         Time:
-        - O(m*m*(min(m,n)))
+        - O(m*m*(min(m,n))) 
+            - We can improve this by doing a binary search: minSide=0,maxSide=min(ROWS,COLS)
+            - then a binary search would have us go over the matrix to find a topleft (r,c) such that its square of size==mid is <=threshold
+                - if yes, then we increase the side size
+                - else decrease the side size
+            - this improves the time complexity to O(m*n*log(min(m,n)))
 
         Space:
         - O(m*n)
@@ -48,3 +53,16 @@ class Solution:
                     else:
                         break
         return res
+
+                    
+                    
+
+
+                
+
+
+
+                
+
+
+        
