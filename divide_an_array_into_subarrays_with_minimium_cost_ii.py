@@ -7,6 +7,10 @@ class Solution:
         Intuition:
             https://www.youtube.com/watch?v=gNf2bNGg294
         
+        - Why do we need 2 lists:
+        Because you need to maintain “the k−1 smallest values inside the current window” while the window is sliding. 
+        One sorted list can store all window elements, but it can’t efficiently maintain the running sum of the k−1 smallest under both insertions and deletions.
+        If you use a single sorted list, youll have to recompute sum every time O(k) operation 
         
         """
         # from containers import SortedList()
