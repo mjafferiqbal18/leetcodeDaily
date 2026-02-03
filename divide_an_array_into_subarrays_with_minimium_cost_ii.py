@@ -5,42 +5,61 @@ class Solution:
         https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-ii/
 
         Intuition:
-        - You can use topdown dp to solve it -> O(kn) time and space
+            https://www.youtube.com/watch?v=gNf2bNGg294
+        
         
         """
-        n = len(nums)
-        sol=[]
-        res=[]
-        memo={}
-        chosen_Is = [] #should be of atleast length 2
-        chosen_Vals = []
- 
-        def topdown(i,kLeft):
-            if kLeft==0:
-                if chosen_Is[0]!=chosen_Is[-1] and (chosen_Is[0]-chosen_Is[-1])<=dist:
-                    return sum(chosen_Vals)
-                else:
-                    return  float('inf')
-            
-            if i==n: #end of array, havent divided array properly
-                return float('inf')
-            
-            key = (i,kLeft)
-            if key in memo:
-                return memo[key]
-            
-            cost = float('inf')
-            #either choose this idx to divide
-            chosen_Is.append(i)
-            chosen_Vals.append(nums[i])
-            cost = min(cost, topdown(i+1,kLeft-1))
-            chosen_Is.pop()
-            chosen_Vals.pop()
+        # from containers import SortedList()
+        n=len(nums)
 
-            #dont choose this idx to divide
-            cost = min(cost, topdown(i+1,kLeft))
+        smallestValsInWindow = SortedList()
+        largestValsInWindow = SortedList()
 
-            memo[key] = cost
-            return cost
+        l = 1
+        #building initial window
+        for r in range(1,1+dist+1):
+            smallestValsInWindow.add((nums[r],r))
+        
+        while len(smallestValsInWindow)>k-1:
+            largestValsInWindow.add(smallestValsInWindow.pop(-1))
+        
+        #now we have built our window out of smallest k-1 and largest values in window
+        windowSum = 0
+        for val,idx in smallestValsInWindow:
+            windowSum+=val
+        
+        res=windowSum
+        
+        # now we iterate
+        for r in range(1+dist+1,n):
+            #remove the left most element in the window
+            elemIdxToBeRemoved = r - dist - 1
+            elemValToBeRemoved = nums[elemIdxToBeRemoved]
+            key = (elemValToBeRemoved,elemIdxToBeRemoved)
+
+            if key in smallestValsInWindow:
+                windowSum -= elemValToBeRemoved
+                smallestValsInWindow.discard(key) #remove that element
+
+                if largestValsInWindow:
+                    sVal, sIdx = largestValsInWindow.pop(0)
+                    smallestValsInWindow.add((sVal,sIdx))
+                    windowSum += sVal
+            elif key in largestValsInWindow:
+                largestValsInWindow.discard(key)
             
-        return topdown(1,k-1)
+            #add the new elem (at nums[r])
+            smallestValsInWindow.add((nums[r],r))
+            windowSum += nums[r]
+
+            if len(smallestValsInWindow)>(k-1):
+                sVal,sIdx = smallestValsInWindow.pop(-1)
+                windowSum -= sVal
+                largestValsInWindow.add((sVal,sIdx))
+            
+            res = min(res, windowSum)
+
+        return nums[0]+res        
+            
+
+       
