@@ -1,8 +1,8 @@
 class Solution:
     def longestBalanced(self, s: str) -> int:
         """
-        Problem: 3719. Longest Balanced Subarray I
-        https://leetcode.com/problems/longest-balanced-subarray-i/
+        Problem: 3719. Longest Balanced Substring I
+        https://leetcode.com/problems/longest-balanced-substring-i/
 
         Intuition:
         - Simple brute force implementation using 2 for loops
