@@ -1,6 +1,9 @@
 class Solution:
     def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
         """ 
+        Problem: 799. Champagne Tower
+        https://leetcode.com/problems/champagne-tower/
+
         Intuition:
         - We pour into the first cup, excess = poured - 1
         - Then pour the excess into the next row, and then so on
