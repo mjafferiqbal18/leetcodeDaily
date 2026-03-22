@@ -13,7 +13,6 @@ class Solution:
         Space:
         - O(1)
         
-        
         """
         for col in range(y,y+k):
             st = x
