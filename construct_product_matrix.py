@@ -1,6 +1,9 @@
 class Solution:
     def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:
         """
+        Problem: 2906. Construct Product Matrix
+        https://leetcode.com/problems/construct-product-matrix/
+
         Intuition:
         - First thought is to take total product of the grid, and then divide each num 
             - while m*n is of 10^5, the product and division operation is what will cost a tle
