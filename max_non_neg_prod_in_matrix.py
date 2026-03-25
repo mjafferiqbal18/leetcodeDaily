@@ -1,6 +1,8 @@
 class Solution:
     def maxProductPath(self, grid: List[List[int]]) -> int:
         """
+        Problem: 1594. Maximum Non Negative Product in a Matrix
+        https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/
         
         Intuition:
         - we can only move right or down; so at a cell (apart from first row and first col) we came there from the left or from above
@@ -91,3 +93,7 @@ class Solution:
 
 
             
+
+
+
+
